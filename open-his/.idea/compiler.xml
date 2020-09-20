@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="doctor-mapper" />
+        <module name="system-domain" />
+        <module name="erp-domain" />
+        <module name="doctor-api" />
+        <module name="his-commons" />
+        <module name="erp-mapper" />
+        <module name="statistis-service" />
+        <module name="doctor-domain" />
+        <module name="statistics-service" />
+        <module name="statistics-api" />
+        <module name="system-web" />
+        <module name="system-api" />
+        <module name="statistics-mapper" />
+        <module name="doctor-service" />
+        <module name="statistics-domain" />
+        <module name="sytem-service" />
+        <module name="system-mapper" />
+        <module name="erp-api" />
+        <module name="erp-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="statistics-service" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="doctor-api" options="-parameters" />
+      <module name="doctor-domain" options="-parameters" />
+      <module name="doctor-mapper" options="-parameters" />
+      <module name="doctor-service" options="-parameters" />
+      <module name="erp-api" options="-parameters" />
+      <module name="erp-domain" options="-parameters" />
+      <module name="erp-mapper" options="-parameters" />
+      <module name="erp-service" options="-parameters" />
+      <module name="his-commons" options="-parameters" />
+      <module name="his-doctor" options="" />
+      <module name="his-erp" options="-parameters" />
+      <module name="his-statistics" options="-parameters" />
+      <module name="his-system" options="-parameters" />
+      <module name="statistics-api" options="-parameters" />
+      <module name="statistics-domain" options="-parameters" />
+      <module name="statistics-mapper" options="-parameters" />
+      <module name="statistics-service" options="-parameters" />
+      <module name="statistis-service" options="-parameters" />
+      <module name="system-api" options="-parameters" />
+      <module name="system-domain" options="-parameters" />
+      <module name="system-mapper" options="-parameters" />
+      <module name="system-web" options="-parameters" />
+      <module name="sytem-service" options="-parameters" />
+    </option>
+  </component>
+</project>
