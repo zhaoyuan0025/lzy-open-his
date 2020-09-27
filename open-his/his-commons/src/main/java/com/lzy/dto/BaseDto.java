@@ -1,7 +1,9 @@
 package com.lzy.dto;
 
 import com.lzy.pojo.SimpleUser;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -14,6 +16,8 @@ import java.util.Date;
  * @create: 2020-09-25 19:46
  **/
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BaseDto implements Serializable {
 
     /**

@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @program: open-his
- * @description: 获取地址工具类
+ * @description: 根据ip地址获取真实地址的工具类
  * @author: lzy
  * @create: 2020-09-25 19:40
  **/
