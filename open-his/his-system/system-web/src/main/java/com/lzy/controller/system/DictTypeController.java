@@ -86,7 +86,7 @@ public class DictTypeController {
      */
     @DeleteMapping("/deleteByIds/{dictIds}")
     public AjaxResult deleteByIds(@PathVariable @Validated @NotNull(message = "传入的字典ID不能为空")Long[] dictIds){
-        return AjaxResult.success("查询成功",this.dictTypeService.deleteDictTypeById(dictIds));
+        return AjaxResult.success("删除成功",this.dictTypeService.deleteDictTypeById(dictIds));
     }
 
     /**

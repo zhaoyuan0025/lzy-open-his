@@ -2,6 +2,8 @@ package com.lzy.config.exception;
 
 
 import com.lzy.vo.AjaxResult;
+import org.springframework.validation.BindException;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,7 +23,6 @@ import java.util.Map;
  **/
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-
     /**
      * 当系统出现MethodArgumentNotValidException这个异常时，会调用下面的方法
      * @param e
@@ -29,21 +30,36 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public AjaxResult jsonErrorHandler(MethodArgumentNotValidException e){
-        //将异常信息以json的格式返回
-        List<Map<String,Object>> list = new ArrayList<>();
-        //得到异常信息对象信息，是一个list集合
-        List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
+        return getAjaxResult(e.getBindingResult());
+    }
+    /**
+     * 当系统出现BindException这个异常时，会调用下面的方法
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = BindException.class)
+    public AjaxResult jsonErrorHandlerForParams(BindException e){
+        return getAjaxResult(e.getBindingResult());
+    }
+
+    /**
+     * 重新包装异常数据
+     * @param bindingResult
+     * @return
+     */
+    private AjaxResult getAjaxResult(BindingResult bindingResult) {
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<ObjectError> allErrors = bindingResult.getAllErrors();
         for (ObjectError allError : allErrors) {
             Map<String, Object> map = new HashMap<>();
-            map.put("defaultMessage",allError.getDefaultMessage());
-            map.put("objectName",allError.getObjectName());
-            //强转,拿到具体的某一属性
-            FieldError field = (FieldError) allError;
-            map.put("field",field.getField());
-            //将map对象加入到list中
+            map.put("defaultMessage", allError.getDefaultMessage());
+            map.put("objectName", allError.getObjectName());
+            //注意，这里面拿到具体的某一个属性
+            FieldError fieldError = (FieldError) allError;
+            map.put("field", fieldError.getField());
             list.add(map);
         }
-        return AjaxResult.fail("后端校验数据异常，不通过！",list);
+        return AjaxResult.fail("后端数据校验异常", list);
     }
 
 }

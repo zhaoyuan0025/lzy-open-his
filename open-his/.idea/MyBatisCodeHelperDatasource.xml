@@ -37,6 +37,18 @@
         <option name="removeTablePreName" value="sys_" />
         <option name="tableGenerateConfigs">
           <map>
+            <entry key="lzy-his:sys_dict_data">
+              <value>
+                <TableGenerateConfig>
+                  <option name="generatedKey" value="dict_code" />
+                  <option name="javaModelName" value="DictData" />
+                  <option name="moduleName" value="his-system" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
             <entry key="lzy-his:sys_dict_type">
               <value>
                 <TableGenerateConfig>
