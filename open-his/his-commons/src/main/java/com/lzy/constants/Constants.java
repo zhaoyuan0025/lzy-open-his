@@ -107,10 +107,16 @@ public interface Constants {
     String ORDER_BACKFEE_STATUS_0 = "0";
     String ORDER_BACKFEE_STATUS_1 = "1";
     String ORDER_BACKFEE_STATUS_2 = "2";
+
     /**
      * 支付类型
      */
     String PAY_TYPE_0 = "0";//现金
     String PAY_TYPE_1 = "1";//支付宝
+
+    /**
+     * redis的字典前缀
+     */
+    String DICT_REDIS_PROFIX="dict:";
 
 }

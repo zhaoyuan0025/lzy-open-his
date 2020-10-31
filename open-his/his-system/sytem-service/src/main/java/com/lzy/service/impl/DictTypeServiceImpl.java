@@ -2,13 +2,18 @@ package com.lzy.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.date.DateUtil;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lzy.constants.Constants;
+import com.lzy.domain.DictData;
 import com.lzy.dto.DictTypeDto;
+import com.lzy.mapper.DictDataMapper;
 import com.lzy.vo.DataGridView;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -25,6 +30,12 @@ public class DictTypeServiceImpl implements DictTypeService{
 
     @Autowired
     private DictTypeMapper dictTypeMapper;
+
+    @Autowired
+    private DictDataMapper dictDataMapper;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     /**
      * 分页查询字典类型
@@ -140,5 +151,37 @@ public class DictTypeServiceImpl implements DictTypeService{
     @Override
     public DictType selectById(Long dictId) {
         return this.dictTypeMapper.selectById(dictId);
+    }
+
+    /**
+     * 同步数据到redis中
+     * 设计的key:
+     * dict:dictType
+     * 列如：dict:sys_user_sex----->[{},{},{},]
+     */
+    @Override
+    public void dictCacheAsync() {
+        //先查询出所有可用的数据
+        QueryWrapper<DictType> qw = new QueryWrapper<>();
+        qw.eq(DictType.COL_STATUS,Constants.STATUS_TRUE);
+        //查询
+        List<DictType> dictTypes = this.dictTypeMapper.selectList(qw);
+        for (DictType dictType : dictTypes) {
+            QueryWrapper<DictData> dictDataQueryWrapper = new QueryWrapper<>();
+            //查询的条件 可用的 类型
+            dictDataQueryWrapper.eq(DictData.COL_STATUS,Constants.STATUS_TRUE);
+            dictDataQueryWrapper.eq(DictData.COL_DICT_TYPE,dictType.getDictType());
+            //排序
+            dictDataQueryWrapper.orderByAsc(DictData.COL_DICT_SORT);
+            //在根据字典类型查询数据，后转成json数据存到Redis
+            List<DictData> dictData = dictDataMapper.selectList(dictDataQueryWrapper);
+            //将查出来的数据转化为json
+            String jsonString = JSON.toJSONString(dictData);
+            //存到redis中
+            ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
+            opsForValue.set(Constants.DICT_REDIS_PROFIX+dictType.getDictType(),jsonString);
+
+        }
+
     }
 }

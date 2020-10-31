@@ -58,4 +58,9 @@ public interface DictTypeService{
      * @return
      */
     DictType selectById(Long dictId);
+
+    /**
+     * 同步数据到redis中
+     */
+    void dictCacheAsync();
 }

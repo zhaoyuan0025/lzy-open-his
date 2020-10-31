@@ -32,7 +32,7 @@ public class DictDataController {
      * @param dictDataDto
      * @return
      */
-    @GetMapping("listForPage")
+    @GetMapping("/listForPage")
     public AjaxResult listForPage(DictDataDto dictDataDto){
         DataGridView dataGridView = this.dictDataService.listPage(dictDataDto);;
         return  AjaxResult.success("查询成功!",dataGridView.getData(),dataGridView.getTotal());
@@ -44,7 +44,7 @@ public class DictDataController {
      * @return
      */
     @PostMapping("/addDictData")
-    public AjaxResult addDictData(@Validated DictDataDto dictDataDto){
+    public AjaxResult addDictData(@Validated @RequestBody DictDataDto dictDataDto){
         dictDataDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         int i = this.dictDataService.insert(dictDataDto);
         return AjaxResult.toAjax(i);
@@ -55,8 +55,8 @@ public class DictDataController {
      * @param dictDataDto
      * @return
      */
-    @PutMapping("updateDictData")
-    public AjaxResult updateDictData(@Validated DictDataDto dictDataDto){
+    @PutMapping("/updateDictData")
+    public AjaxResult updateDictData(@Validated @RequestBody DictDataDto dictDataDto){
         dictDataDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         return AjaxResult.toAjax(this.dictDataService.update(dictDataDto));
     }
@@ -66,7 +66,7 @@ public class DictDataController {
      * @param dictId
      * @return
      */
-    @GetMapping("getDictData/{dictId}")
+    @GetMapping("/getDictData/{dictId}")
     public AjaxResult getDictData(@PathVariable @Validated
                                   @NotNull(message = "字典id不能为空") Long dictId){
         DictData dictData = this.dictDataService.selectById(dictId);
@@ -90,7 +90,7 @@ public class DictDataController {
      * @param id
      * @return
      */
-    @DeleteMapping("deleteById/{id}")
+    @DeleteMapping("/deleteById/{id}")
     public AjaxResult deleteById(@PathVariable @NotNull(message = "ID不能为空！") Long id){
         this.dictDataService.deleteById(id);
         return AjaxResult.success("删除成功！");
@@ -105,6 +105,6 @@ public class DictDataController {
     public AjaxResult getDataByType(@PathVariable @Validated
                                         @NotEmpty(message = "字典类型不能为空") String dictType){
         List<DictData> dictData = this.dictDataService.selectDictDataByDictType(dictType);
-        return AjaxResult.success("查询成功!",dictData);
+        return AjaxResult.success(dictData);
     }
 }

@@ -98,4 +98,18 @@ public class DictTypeController {
         return AjaxResult.success("查询成功"+this.dictTypeService.list());
     }
 
+    /**
+     * 同步字典数据到缓存
+     * @return
+     */
+    @GetMapping("/dictCacheAsync")
+    public AjaxResult dictCacheAsync(){
+        try {
+            this.dictTypeService.dictCacheAsync();
+            return AjaxResult.success("缓存成功!");
+        }catch (Exception e){
+            System.out.println(e);
+            return AjaxResult.error("缓存失败！");
+        }
+    }
 }
