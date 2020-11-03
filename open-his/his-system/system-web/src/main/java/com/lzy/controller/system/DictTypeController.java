@@ -43,9 +43,9 @@ public class DictTypeController {
     @PostMapping("/addDictType")
     public AjaxResult addDictType(@Validated @RequestBody DictTypeDto dictTypeDto){
         //通过id去判断字典类型存不存在，不存在就添加
-//        if (dictTypeService.checkDictTypeUnique(dictTypeDto.getDictId(), dictTypeDto.getDictType())) {
-//            return AjaxResult.fail("新增字典【" + dictTypeDto.getDictName() + "】失败，字典类型已存在");
-//        }
+        if (dictTypeService.checkDictTypeUnique(dictTypeDto.getDictId(), dictTypeDto.getDictType())) {
+            return AjaxResult.fail("新增字典【" + dictTypeDto.getDictName() + "】失败，字典类型已存在");
+        }
         //添加人
         dictTypeDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         //添加
@@ -95,7 +95,7 @@ public class DictTypeController {
      */
     @GetMapping("/selectAllDictType")
     public AjaxResult selectAllDictType(){
-        return AjaxResult.success("查询成功"+this.dictTypeService.list());
+        return AjaxResult.success("查询成功"+this.dictTypeService.list().getData());
     }
 
     /**

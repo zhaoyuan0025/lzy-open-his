@@ -88,10 +88,10 @@ public class DictTypeServiceImpl implements DictTypeService{
         DictType selectOne = dictTypeMapper.selectOne(qw);
         //判断
         if(null != selectOne && dictId.longValue()!=selectOne.getDictId().longValue()){
-            //说明字典
+            //说明字典不存在
             return true;
         }
-        return null;
+        return false;
     }
 
 
