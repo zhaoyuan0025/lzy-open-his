@@ -9,12 +9,14 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
     * 字典类型表
     */
 @ApiModel(value="com-lzy-domain-DictType")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "sys_dict_type")

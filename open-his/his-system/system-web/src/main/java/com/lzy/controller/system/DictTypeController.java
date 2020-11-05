@@ -95,7 +95,7 @@ public class DictTypeController {
      */
     @GetMapping("/selectAllDictType")
     public AjaxResult selectAllDictType(){
-        return AjaxResult.success("查询成功"+this.dictTypeService.list().getData());
+        return AjaxResult.success(this.dictTypeService.list().getData());
     }
 
     /**
