@@ -21,8 +21,12 @@ import java.util.List;
 public class ActiverUser implements Serializable {
 
     private User user;
-    //角色
+    /**
+     * 角色
+     */
     private List<String> roles = Collections.EMPTY_LIST;
-    //权限
+    /**
+     * 权限
+     */
     private List<String> permissions = Collections.EMPTY_LIST;
 }
