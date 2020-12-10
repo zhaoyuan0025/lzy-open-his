@@ -179,7 +179,7 @@ public class ShiroAutoConfiguration {
         //因为RedisManager要操作redis所以必须把Redis的客户端给RedisManager
         RedisManager redisManager = new RedisManager();
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        JedisPool jedisPool = new JedisPool(jedisPoolConfig, redisProperties.getHost(), redisProperties.getPort(), 5000);
+        JedisPool jedisPool = new JedisPool(jedisPoolConfig, redisProperties.getHost(), redisProperties.getPort(), 5000,redisProperties.getPassword());
         redisManager.setJedisPool(jedisPool);
         return redisManager;
     }

@@ -14,16 +14,16 @@
         <module name="system-domain" />
         <module name="erp-mapper" />
         <module name="doctor-mapper" />
+        <module name="doctor-domain" />
         <module name="statistics-service" />
         <module name="statistics-api" />
         <module name="system-api" />
         <module name="statistics-mapper" />
         <module name="system-web" />
-        <module name="doctor-service" />
         <module name="statistics-domain" />
         <module name="statistis-service" />
         <module name="sytem-service" />
-        <module name="doctor-domain" />
+        <module name="doctor-service" />
         <module name="erp-api" />
         <module name="erp-service" />
       </profile>
