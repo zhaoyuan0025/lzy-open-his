@@ -20,11 +20,11 @@ import java.util.Date;
  * @author: lzy
  * @create: 2020-10-30 19:02
  **/
-@ApiModel(value="com-lzy-domain-DictDataDto")
+@ApiModel(value="com-lzy-domain-DictData")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 public class DictDataDto extends BaseDto {
     /**
      * 字典编码

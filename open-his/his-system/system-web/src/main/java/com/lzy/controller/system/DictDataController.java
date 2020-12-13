@@ -44,7 +44,7 @@ public class DictDataController {
      * @return
      */
     @PostMapping("/addDictData")
-    public AjaxResult addDictData(@Validated @RequestBody DictDataDto dictDataDto){
+    public AjaxResult addDictData(@Validated DictDataDto dictDataDto){
         dictDataDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         int i = this.dictDataService.insert(dictDataDto);
         return AjaxResult.toAjax(i);
@@ -56,7 +56,7 @@ public class DictDataController {
      * @return
      */
     @PutMapping("/updateDictData")
-    public AjaxResult updateDictData(@Validated @RequestBody DictDataDto dictDataDto){
+    public AjaxResult updateDictData(@Validated DictDataDto dictDataDto){
         dictDataDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         return AjaxResult.toAjax(this.dictDataService.update(dictDataDto));
     }
