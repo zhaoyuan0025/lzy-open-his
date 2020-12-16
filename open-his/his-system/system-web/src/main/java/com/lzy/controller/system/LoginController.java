@@ -1,14 +1,23 @@
 package com.lzy.controller.system;
 
+import cn.hutool.core.date.DateUtil;
+import com.lzy.aspectj.annotation.Log;
+import com.lzy.aspectj.enums.BussinessType;
 import com.lzy.config.shiro.ActiverUser;
 import com.lzy.constants.Constants;
 import com.lzy.constants.HttpStatus;
+import com.lzy.domain.LoginInfo;
 import com.lzy.domain.Menu;
 import com.lzy.dto.LoginBodyDto;
 import com.lzy.pojo.SimpleUser;
+import com.lzy.service.LoginInfoService;
 import com.lzy.service.MenuService;
+import com.lzy.utils.AddressUtils;
+import com.lzy.utils.IpUtils;
+import com.lzy.utils.ShiroSecurityUtils;
 import com.lzy.vo.AjaxResult;
 import com.lzy.vo.MenuTreeVo;
+import eu.bitwalker.useragentutils.UserAgent;
 import lombok.extern.log4j.Log4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -37,6 +46,9 @@ public class LoginController {
     @Autowired
     private MenuService menuService;
 
+    @Autowired
+    private LoginInfoService loginInfoService;
+
     /**
      * 登录
      * @param loginBodyDto
@@ -55,11 +67,20 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject subject = SecurityUtils.getSubject();
 
+        //封装用户的登录信息
+        LoginInfo loginInfo = createLoginInfo(request);
+        loginInfo.setLoginAccount(loginBodyDto.getUsername());
+
         try {
             subject.login(token);
             //得到会话的token，也就是存在redis里面的额
             Serializable webToken = subject.getSession().getId();
             ajaxResult.put(Constants.TOKEN,webToken);
+            //登录的日志信息
+            loginInfo.setLoginStatus(Constants.LOGIN_SUCCESS);
+            loginInfo.setUserName(ShiroSecurityUtils.getCurrentUserName());
+            loginInfo.setMsg("登陆成功");
+
         } catch (AuthenticationException e) {
             //登录失败
             log.error("用户名或者密码不正确");
@@ -67,8 +88,37 @@ public class LoginController {
             e.printStackTrace();
         }
 
+        //保存到数据库
+        loginInfoService.insertLoginInfo(loginInfo);
         return ajaxResult;
     }
+
+    /**
+     * 构造LoginInfo
+     * @param request
+     * @return
+     */
+    private LoginInfo createLoginInfo(HttpServletRequest request) {
+        LoginInfo loginInfo=new LoginInfo();
+        UserAgent userAgent= UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
+        //获取ID地址
+        String ipAddr= IpUtils.getIpAddr(request);
+        //获取操作系统
+        String os=userAgent.getOperatingSystem().getName();
+        //获取浏览器类型
+        String browser=userAgent.getBrowser().getName();
+        //获取登陆地址
+        String location= AddressUtils.getRealAddressByIP(ipAddr);
+
+        loginInfo.setIpAddr(ipAddr);
+        loginInfo.setLoginLocation(location);
+        loginInfo.setOs(os);
+        loginInfo.setBrowser(browser);
+        loginInfo.setLoginTime(DateUtil.date());
+        loginInfo.setLoginType(Constants.LOGIN_TYPE_SYSTEM);
+        return loginInfo;
+    }
+
 
     /**
      * 获取登录用户的信息
@@ -92,6 +142,7 @@ public class LoginController {
      * @return
      */
     @PostMapping("/logout")
+    @Log(title = "用户退出",businessType = BussinessType.OTHER)
     public AjaxResult logout(){
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
