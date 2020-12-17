@@ -119,4 +119,15 @@ public interface Constants {
      */
     String DICT_REDIS_PROFIX="dict:";
 
+    /**
+     * 登陆状态  0 成功  1失败
+     */
+    String LOGIN_SUCCESS = "0";
+    String LOGIN_ERROR = "1";
+    /**
+     * 登陆类型0系统用户1患者用户
+     */
+    String LOGIN_TYPE_SYSTEM = "0" ;
+    String LOGIN_TYPE_PATIENT = "1" ;
+
 }

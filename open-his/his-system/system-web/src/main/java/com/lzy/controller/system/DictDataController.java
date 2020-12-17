@@ -1,5 +1,7 @@
 package com.lzy.controller.system;
 
+import com.lzy.aspectj.annotation.Log;
+import com.lzy.aspectj.enums.BussinessType;
 import com.lzy.domain.DictData;
 import com.lzy.dto.DictDataDto;
 import com.lzy.service.DictDataService;
@@ -44,7 +46,8 @@ public class DictDataController {
      * @return
      */
     @PostMapping("/addDictData")
-    public AjaxResult addDictData(@Validated @RequestBody DictDataDto dictDataDto){
+    @Log(title = "添加字典的数据",businessType = BussinessType.INSERT)
+    public AjaxResult addDictData(@Validated DictDataDto dictDataDto){
         dictDataDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         int i = this.dictDataService.insert(dictDataDto);
         return AjaxResult.toAjax(i);
@@ -56,7 +59,8 @@ public class DictDataController {
      * @return
      */
     @PutMapping("/updateDictData")
-    public AjaxResult updateDictData(@Validated @RequestBody DictDataDto dictDataDto){
+    @Log(title = "修改字典的数据",businessType = BussinessType.UPDATE)
+    public AjaxResult updateDictData(@Validated DictDataDto dictDataDto){
         dictDataDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         return AjaxResult.toAjax(this.dictDataService.update(dictDataDto));
     }
@@ -79,6 +83,7 @@ public class DictDataController {
      * @return
      */
     @DeleteMapping("/deleteByIds/{dictCodeIds}")
+    @Log(title = "删除字典数据",businessType = BussinessType.DELETE)
     public AjaxResult deleteByIds(@PathVariable @Validated
                                   @NotEmpty(message = "字典id不能为空") Long[] dictCodeIds ) {
         int ids = this.dictDataService.deleteByIds(dictCodeIds);
@@ -91,6 +96,7 @@ public class DictDataController {
      * @return
      */
     @DeleteMapping("/deleteById/{id}")
+    @Log(title = "删除字典数据",businessType = BussinessType.DELETE)
     public AjaxResult deleteById(@PathVariable @NotNull(message = "ID不能为空！") Long id){
         this.dictDataService.deleteById(id);
         return AjaxResult.success("删除成功！");

@@ -1,5 +1,7 @@
 package com.lzy.controller.system;
 
+import com.lzy.aspectj.annotation.Log;
+import com.lzy.aspectj.enums.BussinessType;
 import com.lzy.dto.DictTypeDto;
 import com.lzy.service.DictTypeService;
 import com.lzy.utils.ShiroSecurityUtils;
@@ -41,6 +43,7 @@ public class DictTypeController {
      * @return
      */
     @PostMapping("/addDictType")
+    @Log(title = "添加字典类型数据",businessType = BussinessType.INSERT)
     public AjaxResult addDictType(@Validated @RequestBody DictTypeDto dictTypeDto){
         //通过id去判断字典类型存不存在，不存在就添加
         if (dictTypeService.checkDictTypeUnique(dictTypeDto.getDictId(), dictTypeDto.getDictType())) {
@@ -58,6 +61,7 @@ public class DictTypeController {
      * @return
      */
     @PutMapping("/updateDictType")
+    @Log(title = "修改字典类型的数据",businessType = BussinessType.UPDATE)
     public AjaxResult updateDictType(@Validated DictTypeDto dictTypeDto){
         //通过id去判断字典类型存不存在，不存在就添加
 //        if (dictTypeService.checkDictTypeUnique(dictTypeDto.getDictId(), dictTypeDto.getDictType())) {
@@ -85,6 +89,7 @@ public class DictTypeController {
      * @return
      */
     @DeleteMapping("/deleteByIds/{dictIds}")
+    @Log(title = "删除字典数据",businessType = BussinessType.DELETE)
     public AjaxResult deleteByIds(@PathVariable @Validated @NotNull(message = "传入的字典ID不能为空")Long[] dictIds){
         return AjaxResult.success("删除成功",this.dictTypeService.deleteDictTypeById(dictIds));
     }
