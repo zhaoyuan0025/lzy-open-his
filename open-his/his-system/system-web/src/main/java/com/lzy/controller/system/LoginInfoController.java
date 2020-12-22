@@ -25,7 +25,7 @@ public class LoginInfoController {
     /**
      * 分页查询
      */
-    @GetMapping("listForPage")
+    @GetMapping("/listForPage")
     public AjaxResult listForPage(LoginInfoDTO loginInfoDto){
         DataGridView gridView = loginInfoService.listForPage(loginInfoDto);
         return AjaxResult.success("查询成功",gridView.getData(),gridView.getTotal());
@@ -34,7 +34,7 @@ public class LoginInfoController {
     /**
      * 删除
      */
-    @DeleteMapping("deleteLoginInfoByIds/{infoIds}")
+    @DeleteMapping("/deleteLoginInfoByIds/{infoIds}")
     public AjaxResult deleteLoginInfoByIds(@PathVariable Long[] infoIds){
         return AjaxResult.toAjax(this.loginInfoService.deleteLoginInfoByIds(infoIds));
     }
@@ -42,7 +42,7 @@ public class LoginInfoController {
     /**
      * 清空删除
      */
-    @DeleteMapping("clearLoginInfo")
+    @DeleteMapping("/clearLoginInfo")
     public AjaxResult clearLoginInfo(){
         return AjaxResult.toAjax(this.loginInfoService.clearLoginInfo());
     }
