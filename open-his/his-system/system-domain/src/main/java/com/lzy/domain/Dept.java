@@ -110,6 +110,13 @@ public class Dept extends BaseEntity {
     @ApiModelProperty(value="更新者")
     private String updateBy;
 
+    /**
+     * 物理删除
+     */
+    @TableField(value = "deleted")
+    @ApiModelProperty(value="物理删除")
+    private Integer deleted;
+
     public static final String COL_DEPT_ID = "dept_id";
 
     public static final String COL_DEPT_NAME = "dept_name";
