@@ -113,9 +113,9 @@ public class Dept extends BaseEntity {
     /**
      * 物理删除
      */
-    @TableField(value = "deleted")
-    @ApiModelProperty(value="物理删除")
-    private Integer deleted;
+//    @TableField(value = "deleted")
+//    @ApiModelProperty(value="物理删除")
+//    private Integer deleted;
 
     public static final String COL_DEPT_ID = "dept_id";
 

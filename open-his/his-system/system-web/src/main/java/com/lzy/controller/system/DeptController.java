@@ -60,11 +60,11 @@ public class DeptController {
      */
     @PostMapping("/addDept")
     @Log(title = "科室管理", businessType = BussinessType.INSERT)
-    public AjaxResult addDept(@Validated DeptDTO deptDto) {
+    public AjaxResult addDept(@Validated @RequestBody DeptDTO deptDto) {
         deptDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         return AjaxResult.toAjax(this.deptService.addDept(deptDto));
     }
-
+ 
     /**
      * 修改
      */

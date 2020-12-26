@@ -80,7 +80,7 @@ public class DeptServiceImpl implements DeptService {
         BeanUtil.copyProperties(deptDto,dept);
         dept.setCreateBy(deptDto.getSimpleUser().getUserName());
         dept.setCreateTime(DateUtil.date());
-        dept.setDeleted(0);
+//        dept.setDeleted(0);
         return deptMapper.insert(dept);
     }
 

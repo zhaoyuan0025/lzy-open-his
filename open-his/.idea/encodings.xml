@@ -2,27 +2,9 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/his-commons/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-doctor/doctor-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-doctor/doctor-domain/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-doctor/doctor-mapper/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/his-doctor/doctor-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-doctor/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-doctor/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-erp/erp-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-erp/erp-domain/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-erp/erp-mapper/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/his-erp/erp-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-erp/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-erp/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-statistics/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-statistics/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-statistics/statistics-api/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-statistics/statistics-domain/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-statistics/statistics-domain/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-statistics/statistics-mapper/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/his-statistics/statistis-service/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-system/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/his-system/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/his-system/system-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/his-system/system-domain/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/his-system/system-mapper/src/main/java" charset="UTF-8" />
