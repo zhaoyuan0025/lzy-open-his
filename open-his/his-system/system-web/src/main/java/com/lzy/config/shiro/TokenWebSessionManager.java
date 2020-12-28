@@ -29,13 +29,14 @@ public class TokenWebSessionManager extends DefaultWebSessionManager {
      */
     @Override
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
-        //从请求头获得token，没有酒生成
+        //从请求头获得token，没有就生成
         String token = WebUtils.toHttp(request).getHeader(Constants.TOKEN);
         if(StringUtils.hasText(token)){
             //判断请求头里面是否含有token
             return token;
         }else {
          //没有就生成，返回前台
+//         return UUID.randomUUID().toString();
          return UUID.randomUUID().toString();
         }
     }

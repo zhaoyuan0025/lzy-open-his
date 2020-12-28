@@ -73,7 +73,7 @@ public class LoginController {
 
         try {
             subject.login(token);
-            //得到会话的token，也就是存在redis里面的
+            //得到会话的token，存入redis
             Serializable webToken = subject.getSession().getId();
             ajaxResult.put(Constants.TOKEN,webToken);
             //登录的日志信息

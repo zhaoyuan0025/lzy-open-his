@@ -23,4 +23,8 @@
     menu_id, parent_id, parent_ids, menu_name, menu_type, percode, `path`, remark, `status`, 
     create_time, update_time, create_by, update_by
   </sql>
+  <!--根据菜单ID查询子节点个数-->
+    <select id="queryChildCountByMenuId" resultType="java.lang.Long">
+      select count(1) from sys_menu where parent_id=#{menuId}
+    </select>
 </mapper>
