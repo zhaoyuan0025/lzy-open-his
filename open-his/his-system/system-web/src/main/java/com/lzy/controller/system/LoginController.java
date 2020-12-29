@@ -75,6 +75,7 @@ public class LoginController {
             subject.login(token);
             //得到会话的token，存入redis
             Serializable webToken = subject.getSession().getId();
+            System.out.println(webToken);
             ajaxResult.put(Constants.TOKEN,webToken);
             //登录的日志信息
             loginInfo.setLoginStatus(Constants.LOGIN_SUCCESS);

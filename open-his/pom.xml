@@ -35,6 +35,7 @@
         <hutool.version>5.1.1</hutool.version>
         <bitwalker.version>1.19</bitwalker.version>
         <dubbo.version>2.7.5</dubbo.version>
+        <jwt.version>3.4.0</jwt.version>
     </properties>
 
     <dependencyManagement>
@@ -88,6 +89,13 @@
                 <groupId>eu.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>${bitwalker.version}</version>
+            </dependency>
+
+            <!--jwt token认证-->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>${jwt.version}</version>
             </dependency>
 
             <!--dubbo-->

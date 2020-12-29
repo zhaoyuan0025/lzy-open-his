@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * @author: lzy
  * @create: 2020-12-27 01:39
  **/
-@ApiModel(value = "com-lzy-dto-MenuDto")
+@ApiModel(value = "com-lzy-dto-MenuDTO")
 @Data
 @EqualsAndHashCode(callSuper = true)
 @AllArgsConstructor

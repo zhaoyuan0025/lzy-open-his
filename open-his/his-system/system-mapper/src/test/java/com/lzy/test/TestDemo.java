@@ -1,14 +1,6 @@
 package com.lzy.test;
 
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.core.io.Resource;
-
-import java.io.IOException;
-import java.io.InputStream;
-
 /**
  * @program: open-his
  * @description:
@@ -18,14 +10,17 @@ import java.io.InputStream;
 public class TestDemo {
 
     public static void main(String[] args) {
-        try {
-            InputStream resource = Resources.getResourceAsStream("");
-            SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
-            SqlSessionFactory build = builder.build(resource);
+//        try {
+//            InputStream resource = Resources.getResourceAsStream("");
+//            SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+//            SqlSessionFactory build = builder.build(resource);
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        //jwt 生成token对象
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

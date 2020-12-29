@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
  * @author: lzy
  * @create: 2020-12-17 00:43
  **/
-@ApiModel(value="com-lzy-dto-LoginInfoDto")
+@ApiModel(value="com-lzy-dto-LoginInfoDTO")
 @Data
 @EqualsAndHashCode(callSuper=true)
 @AllArgsConstructor

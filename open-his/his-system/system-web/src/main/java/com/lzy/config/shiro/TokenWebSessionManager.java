@@ -1,5 +1,7 @@
 package com.lzy.config.shiro;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.lzy.constants.Constants;
 import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -29,6 +31,9 @@ public class TokenWebSessionManager extends DefaultWebSessionManager {
      */
     @Override
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
+
+        //token生成密钥
+//        private static String SING = "你的密钥";
         //从请求头获得token，没有就生成
         String token = WebUtils.toHttp(request).getHeader(Constants.TOKEN);
         if(StringUtils.hasText(token)){
@@ -37,7 +42,11 @@ public class TokenWebSessionManager extends DefaultWebSessionManager {
         }else {
          //没有就生成，返回前台
 //         return UUID.randomUUID().toString();
-         return UUID.randomUUID().toString();
+            String tokenWeb = JWT.create()
+                    .withClaim("liuxiaoshao", "fhdjahfjkh")
+                    .sign(Algorithm.HMAC256("fjafhdjhaahds5454"));
+
+            return UUID.randomUUID().toString();
         }
     }
 }
