@@ -113,6 +113,12 @@ public class Dept extends BaseEntity {
     /**
      * 物理删除
      */
+    @TableField(value = "del_flag")
+    @ApiModelProperty(value = "物理删除")
+    private String delFlag;
+    /**
+     * 物理删除
+     */
 //    @TableField(value = "deleted")
 //    @ApiModelProperty(value="物理删除")
 //    private Integer deleted;

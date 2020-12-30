@@ -98,6 +98,7 @@ public class Role extends BaseEntity {
     @ApiModelProperty(value="更新者")
     private String updateBy;
 
+
     public static final String COL_ROLE_ID = "role_id";
 
     public static final String COL_ROLE_NAME = "role_name";
