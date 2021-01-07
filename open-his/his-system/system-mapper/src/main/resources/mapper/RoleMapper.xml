@@ -26,6 +26,7 @@
         values(#{roleId},#{menuId})
     </insert>
 
+    <!--删除角色-->
     <delete id="deleteRoleMenuByRoleIds">
       delete from sys_role_menu
       <where>
