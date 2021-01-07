@@ -126,4 +126,15 @@ public class MenuServiceImpl implements MenuService{
     public boolean hasChildByMenuId(Long menuId) {
         return menuMapper.queryChildCountByMenuId(menuId) > 0L ? true : false;
     }
+
+    /**
+     * 根据角色id查询菜单角色的id
+     * @param roleId
+     * @return
+     */
+    @Override
+    public List<Long> getMenusByRoleId(Long roleId) {
+        List<Long> list =  menuMapper.getMenusByRoleId(roleId);
+        return list;
+    }
 }

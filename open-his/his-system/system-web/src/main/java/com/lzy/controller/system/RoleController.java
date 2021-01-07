@@ -84,4 +84,24 @@ public class RoleController {
         return AjaxResult.toAjax(roleService.deleteRoleByIds(roleIds));
     }
 
+    /**
+     * 保存角色和菜单之间的关系
+     * @param roleId
+     * @param menuIds
+     * @return
+     */
+    @PostMapping("saveRoleMenu/{roleId}/{menuIds}")
+    public AjaxResult saveRoleMenu(@PathVariable Long roleId,@PathVariable Long[] menuIds){
+        /**
+         * 因为我们用的路径参数，前端可能传过来的menuIds是一个空的，但是为空的话无法匹配上面的路径
+         * 所以如果为空，我们让前端传一个-1过来，如果是-1说明当前角色一个权限也没有选择
+         */
+        if(menuIds.length==1&&menuIds[0].equals(-1L)){
+            menuIds=new Long[]{};
+        }
+        this.roleService.saveRoleMenu(roleId, menuIds);
+        return AjaxResult.success();
+    }
+
+
 }

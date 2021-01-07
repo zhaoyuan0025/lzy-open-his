@@ -132,4 +132,14 @@ public class RoleServiceImpl implements RoleService {
         return 0;
 
     }
+
+    @Override
+    public void saveRoleMenu(Long roleId, Long[] menuIds) {
+        //根据角色ID删除sys_role_menu的数据
+        roleMapper.deleteRoleMenuByRoleIds(Arrays.asList(roleId));
+        for (Long menuId : menuIds) {
+            roleMapper.saveRoleMenu(roleId,menuId);
+        }
+
+    }
 }

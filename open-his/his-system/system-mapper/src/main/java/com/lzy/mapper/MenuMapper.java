@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lzy.domain.Menu;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * 菜单权限
  * @author 刘少
@@ -17,4 +19,11 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * @return
      */
     Long queryChildCountByMenuId(Long menuId);
+
+    /**
+     * 根据菜单角色查询权限菜单的id
+     * @param roleId
+     * @return
+     */
+    List<Long> getMenusByRoleId(Long roleId);
 }

@@ -4,6 +4,7 @@ import com.lzy.constants.Constants;
 import com.lzy.domain.Menu;
 import com.lzy.dto.MenuDTO;
 import com.lzy.service.MenuService;
+import com.lzy.utils.Result;
 import com.lzy.utils.ShiroSecurityUtils;
 import com.lzy.vo.AjaxResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,4 +101,16 @@ public class MenuController {
         int i = menuService.deleteMenuById(menuId);
         return AjaxResult.toAjax(i);
     }
+
+    /**
+     * 根据角色id查询菜单权限
+     * @param roleId
+     * @return
+     */
+    @GetMapping("/getMenuIdsByRoles/{roleId}")
+    public Result<Object> getMenuIdsByRoles(Long roleId){
+        List<Long> longList =  menuService.getMenusByRoleId(roleId);
+        return new Result<>("查询成功！",longList);
+    }
+
 }
