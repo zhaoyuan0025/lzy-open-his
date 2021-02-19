@@ -14,6 +14,13 @@
 
     <dependencies>
 
+        <!--shiro的依赖-->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+            <version>1.4.2</version>
+        </dependency>
+
         <!--引入校验框架-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

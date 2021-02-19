@@ -8,6 +8,7 @@ import com.lzy.domain.Menu;
 import com.lzy.dto.MenuDTO;
 import com.lzy.exception.MedicalException;
 import com.lzy.mapper.MenuMapper;
+import com.lzy.mapper.RoleMapper;
 import com.lzy.pojo.SimpleUser;
 import com.lzy.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 /**
   *
@@ -26,6 +28,9 @@ public class MenuServiceImpl implements MenuService{
 
     @Autowired
     private MenuMapper menuMapper;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public List<Menu> selectMenuTree(boolean isAdmin, SimpleUser simpleUser) {
@@ -114,6 +119,8 @@ public class MenuServiceImpl implements MenuService{
     public int deleteMenuById(Long menuId) {
         //先删除role_menu的中间表的数据【后面再加】
         //再删除菜单或权限
+        //删除sys_role_menu中间表的数据[后面完成]
+        roleMapper.deleteRoleMenuByMenuIds(Arrays.asList(menuId));
         return menuMapper.deleteById(menuId);
     }
 
@@ -137,4 +144,5 @@ public class MenuServiceImpl implements MenuService{
         List<Long> list =  menuMapper.getMenusByRoleId(roleId);
         return list;
     }
+
 }

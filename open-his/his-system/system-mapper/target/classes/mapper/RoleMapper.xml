@@ -26,6 +26,7 @@
         values(#{roleId},#{menuId})
     </insert>
 
+    <!--删除角色-->
     <delete id="deleteRoleMenuByRoleIds">
       delete from sys_role_menu
       <where>
@@ -34,6 +35,7 @@
         </foreach>
       </where>
     </delete>
+
     <delete id="deleteRoleUserByRoleIds">
       delete from sys_role_user
       <where>
@@ -43,7 +45,24 @@
       </where>
     </delete>
 
-<!--    <insert id="saveRoleMenu">-->
+    <delete id="deleteRoleUserByUserIds">
+        delete from sys_role_user
+        <where>
+            <foreach collection="ids" open=" user_id in (" separator="," close=")" item="sn">
+                #{sn}
+            </foreach>
+        </where>
+    </delete>
+    <delete id="deleteRoleMenuByMenuIds">
+        delete from sys_role_menu
+        <where>
+            <foreach collection="ids" open=" menu_id in (" separator="," close=")" item="sn">
+                #{sn}
+            </foreach>
+        </where>
+    </delete>
+
+    <!--    <insert id="saveRoleMenu">-->
 <!--      insert into sys_role_menu(role_id, menu_id) values (#{roleId},#{menuId})-->
 <!--    </insert>-->
 

@@ -55,7 +55,7 @@ public class MenuController {
      * @param menuDTO
      * @return
      */
-    @PostMapping("addMenu")
+    @PostMapping("/addMenu")
     public AjaxResult addMenu(@Validated @RequestBody MenuDTO menuDTO){
         menuDTO.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
         int menu = menuService.addMenu(menuDTO);
@@ -108,7 +108,7 @@ public class MenuController {
      * @return
      */
     @GetMapping("/getMenuIdsByRoles/{roleId}")
-    public Result<Object> getMenuIdsByRoles(Long roleId){
+    public Result<Object> getMenuIdsByRoles(@PathVariable Long roleId){
         List<Long> longList =  menuService.getMenusByRoleId(roleId);
         return new Result<>("查询成功！",longList);
     }

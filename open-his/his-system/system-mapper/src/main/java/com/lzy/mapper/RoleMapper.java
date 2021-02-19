@@ -2,6 +2,7 @@ package com.lzy.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lzy.domain.Role;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,4 +34,16 @@ public interface RoleMapper extends BaseMapper<Role> {
      * @param menuId
      */
     void saveRoleMenu(Long roleId, Long menuId);
+
+    /**
+     * 根据用户IDS删除sys_role_user里面的数据
+     * @param ids
+     */
+    void deleteRoleUserByUserIds(@Param("ids") List<Long> ids);
+
+    /**
+     * 根据菜单权限ID删除sys_role_menu
+     */
+    void deleteRoleMenuByMenuIds(@Param("ids") List<Long> ids);
+
 }
