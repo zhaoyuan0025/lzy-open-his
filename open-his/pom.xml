@@ -36,6 +36,7 @@
         <bitwalker.version>1.19</bitwalker.version>
         <dubbo.version>2.7.5</dubbo.version>
         <jwt.version>3.4.0</jwt.version>
+        <mybatis.version>2.1.3</mybatis.version>
     </properties>
 
     <dependencyManagement>
@@ -51,6 +52,12 @@
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!--mybatis的依賴-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
             <!--shiro的包-->
             <dependency>
