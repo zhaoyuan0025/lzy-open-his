@@ -81,3 +81,9 @@ dubbo:
     check: false
   config-center:
     timeout: 15
+#文件服务器
+minio:
+  apiEndpoint: 47.93.125.194:9000
+  proxyEndpoint: 47.93.125.194:9000
+  accessKey: admin
+  secretKey: minio@lzy

@@ -77,6 +77,12 @@
             <artifactId>fastdfs-client</artifactId>
         </dependency>
 
+        <!--minio的依赖-->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
+
         <!--测试的依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
