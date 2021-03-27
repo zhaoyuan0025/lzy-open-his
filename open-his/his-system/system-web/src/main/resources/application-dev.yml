@@ -1,7 +1,7 @@
 #开发环境
 #端口
 server:
-  port: 8080
+  port: 1001
 #spring的配置
 spring:
   #数据源的配置
@@ -28,7 +28,7 @@ spring:
   #配置redis
   redis:
     port: 6390
-    host: 47.93.125.194
+    host: 192.168.2.125
     password: 123456
   mvc:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -83,7 +83,7 @@ dubbo:
     timeout: 15
 #文件服务器
 minio:
-  apiEndpoint: http://47.93.125.194:9000
+  apiEndpoint: http://192.168.2.125:9000
 #  proxyEndpoint: http://47.93.125.194:9000
   accessKey: admin
   secretKey: minio@lzy

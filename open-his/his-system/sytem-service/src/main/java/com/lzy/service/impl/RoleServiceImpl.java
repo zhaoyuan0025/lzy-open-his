@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lzy.constants.Constants;
 import com.lzy.domain.Role;
 import com.lzy.dto.RoleDTO;
-import com.lzy.exception.MedicalException;
 import com.lzy.mapper.RoleMapper;
 import com.lzy.service.RoleService;
 import com.lzy.vo.DataGridView;
@@ -86,11 +85,14 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public int addRole(RoleDTO roleDTO) {
-        //先通过id查询角色
-        Role roleById = getOne(roleDTO.getRoleId());
-        if(roleById.getRoleName().equals(roleDTO.getRoleName())){
-            throw new MedicalException("该角色已经存在，请勿重复添加");
-        }
+        //先角色名称查询角色
+//        Role roleById = getOne(roleDTO.getRoleId());
+//        Role one = roleMapper.selectOne(new LambdaQueryWrapper<Role>()
+//                .eq(Role::getRoleName, roleDTO.getRoleName()));
+//
+//        if(roleDTO.getRoleName().equals(one.getRoleName())){
+//            throw new MedicalException("该角色已经存在，请勿重复添加");
+//        }
         Role role = new Role();
         BeanUtil.copyProperties(roleDTO,role);
         //创建人，创建时间

@@ -3,6 +3,7 @@ package com.lzy.controller.system;
 import com.lzy.domain.Role;
 import com.lzy.dto.RoleDTO;
 import com.lzy.service.RoleService;
+import com.lzy.utils.Result;
 import com.lzy.utils.ShiroSecurityUtils;
 import com.lzy.vo.AjaxResult;
 import com.lzy.vo.DataGridView;
@@ -30,7 +31,7 @@ public class RoleController {
      * @param roleDto
      * @return
      */
-    @GetMapping("listRoleForPage")
+    @GetMapping("/listRoleForPage")
     public AjaxResult listRoleForPage(RoleDTO roleDto){
         DataGridView gridView = roleService.listRolePage(roleDto);
         return AjaxResult.success("查询成功",gridView.getData(),gridView.getTotal());
@@ -60,9 +61,11 @@ public class RoleController {
      * 添加
      */
     @PostMapping("/addRole")
-    public AjaxResult addRole(@Validated @RequestBody RoleDTO roleDto){
+    public Result addRole(@Validated @RequestBody RoleDTO roleDto){
         roleDto.setSimpleUser(ShiroSecurityUtils.getCurrentSimpleUser());
-        return AjaxResult.toAjax(roleService.addRole(roleDto));
+//        return AjaxResult.toAjax(roleService.addRole(roleDto));
+        int role = roleService.addRole(roleDto);
+        return new Result("添加成功！",role);
     }
 
     /**
@@ -90,7 +93,7 @@ public class RoleController {
      * @param menuIds
      * @return
      */
-    @PostMapping("saveRoleMenu/{roleId}/{menuIds}")
+    @PostMapping("/saveRoleMenu/{roleId}/{menuIds}")
     public AjaxResult saveRoleMenu(@PathVariable Long roleId,@PathVariable Long[] menuIds){
         /**
          * 因为我们用的路径参数，前端可能传过来的menuIds是一个空的，但是为空的话无法匹配上面的路径

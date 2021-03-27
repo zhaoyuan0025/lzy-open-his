@@ -1,6 +1,5 @@
 package com.lzy.common.minio.util;
 
-import com.lzy.common.minio.config.MinioProp;
 import com.lzy.exception.MedicalException;
 import com.lzy.utils.MiuKit;
 import io.minio.*;
@@ -29,9 +28,6 @@ public class MinioUtil {
     @Autowired
     private MinioClient minioClient;
 
-    @Autowired
-    private MinioProp minioProp;
-
     /**
      * 创建bucket
      *
@@ -42,7 +38,7 @@ public class MinioUtil {
         if(!minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build())){
             //不存在
             minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
-
+            minioClient.setBucketPolicy(SetBucketPolicyArgs.builder().config("*.*").build());
         }
     }
 
@@ -69,7 +65,7 @@ public class MinioUtil {
             log.info("文件的大小为："+fileSize);
 
             //判断桶是否存在
-//            createBucket(uploadDTO.getBuckName());
+            createBucket(uploadDTO.getBuckName());
             String filename = file.getOriginalFilename();
             log.info("1.filename:{}",filename);
             assert filename !=null;
