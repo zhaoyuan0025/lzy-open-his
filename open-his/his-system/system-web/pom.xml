@@ -19,6 +19,13 @@
 
 
     <dependencies>
+        <!--rabbitmq的依赖-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-amqp</artifactId>-->
+<!--            <version>2.4.2</version>-->
+<!--        </dependency>-->
+
         <!--service层的依赖-->
         <dependency>
             <groupId>com.lzy</groupId>
@@ -68,6 +75,12 @@
         <dependency>
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
+        </dependency>
+
+        <!--minio的依赖-->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
         </dependency>
 
         <!--测试的依赖-->

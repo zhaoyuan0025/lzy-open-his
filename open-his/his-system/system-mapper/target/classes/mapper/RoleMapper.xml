@@ -30,8 +30,9 @@
     <delete id="deleteRoleMenuByRoleIds">
       delete from sys_role_menu
       <where>
-        <foreach collection="ids" open=" role_id in (" separator="," close=")" item="sn">
-          #{sn}
+        role_id in
+        <foreach collection="list" index="index" open="(" separator="," close=")" item="item">
+          #{item}
         </foreach>
       </where>
     </delete>
@@ -39,8 +40,9 @@
     <delete id="deleteRoleUserByRoleIds">
       delete from sys_role_user
       <where>
-        <foreach collection="ids" open=" role_id in (" separator="," close=")" item="sn">
-          #{sn}
+        role_id in
+        <foreach collection="list" index="index" open="(" separator="," close=")" item="item">
+          #{item}
         </foreach>
       </where>
     </delete>
@@ -48,8 +50,8 @@
     <delete id="deleteRoleUserByUserIds">
         delete from sys_role_user
         <where>
-            <foreach collection="ids" open=" user_id in (" separator="," close=")" item="sn">
-                #{sn}
+            <foreach collection="lsit" open=" user_id in (" separator="," close=")" item="sn">
+                #{ids}
             </foreach>
         </where>
     </delete>
@@ -57,7 +59,7 @@
         delete from sys_role_menu
         <where>
             <foreach collection="ids" open=" menu_id in (" separator="," close=")" item="sn">
-                #{sn}
+                #{ids}
             </foreach>
         </where>
     </delete>
