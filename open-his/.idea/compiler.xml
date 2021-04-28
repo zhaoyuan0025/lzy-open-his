@@ -25,11 +25,13 @@
         <module name="sytem-service" />
         <module name="doctor-domain" />
         <module name="statistics-mapper" />
+        <module name="alipay-demo" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="alipay-demo" options="-parameters" />
       <module name="doctor-api" options="-parameters" />
       <module name="doctor-domain" options="-parameters" />
       <module name="doctor-mapper" options="-parameters" />

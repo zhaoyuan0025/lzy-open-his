@@ -1,4 +1,4 @@
-package com.lzy.pojo;
+package com.lzy.domain;
 
 import java.io.Serializable;
 

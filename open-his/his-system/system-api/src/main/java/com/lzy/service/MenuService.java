@@ -3,7 +3,7 @@ package com.lzy.service;
 
 import com.lzy.domain.Menu;
 import com.lzy.dto.MenuDTO;
-import com.lzy.pojo.SimpleUser;
+import com.lzy.domain.SimpleUser;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.lzy.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.lzy.pojo.SimpleUser;
+import com.lzy.domain.SimpleUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

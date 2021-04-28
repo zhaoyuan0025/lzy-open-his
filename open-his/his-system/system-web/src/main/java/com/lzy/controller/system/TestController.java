@@ -28,4 +28,6 @@ public class TestController {
         String upload = minioUtil.upload(dto);
         return new Result<>("上传成功",upload);
     }
+
+
 }

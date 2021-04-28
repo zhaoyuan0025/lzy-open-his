@@ -9,6 +9,7 @@
         <module>his-erp</module>
         <module>his-doctor</module>
         <module>his-statistics</module>
+        <module>alipay-demo</module>
     </modules>
 
     <parent>

@@ -9,7 +9,7 @@ import com.lzy.constants.HttpStatus;
 import com.lzy.domain.LoginInfo;
 import com.lzy.domain.Menu;
 import com.lzy.dto.LoginBodyDto;
-import com.lzy.pojo.SimpleUser;
+import com.lzy.domain.SimpleUser;
 import com.lzy.service.LoginInfoService;
 import com.lzy.service.MenuService;
 import com.lzy.utils.AddressUtils;

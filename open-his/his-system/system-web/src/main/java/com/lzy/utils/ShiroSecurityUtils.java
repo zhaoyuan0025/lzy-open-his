@@ -3,7 +3,7 @@ package com.lzy.utils;
 import com.lzy.config.shiro.ActiverUser;
 import com.lzy.constants.Constants;
 import com.lzy.domain.User;
-import com.lzy.pojo.SimpleUser;
+import com.lzy.domain.SimpleUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 

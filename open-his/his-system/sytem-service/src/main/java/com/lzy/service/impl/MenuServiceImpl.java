@@ -9,7 +9,7 @@ import com.lzy.dto.MenuDTO;
 import com.lzy.exception.MedicalException;
 import com.lzy.mapper.MenuMapper;
 import com.lzy.mapper.RoleMapper;
-import com.lzy.pojo.SimpleUser;
+import com.lzy.domain.SimpleUser;
 import com.lzy.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

@@ -8,8 +8,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/lzy-his?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: 123456
+    username: ENC(vZsl8gKuyFucS4eMJw+rDGA/k4TVUkQ84F4TdYKsWIbRiJhqxvgq7lW0Pi/y1mig)
+    password: ENC(lFFAtOtPo7rfNAgQikYXdvdRwKkbsbvcCDsZLmquZQ6Xo0eFHnIqf3i5mRyjvKRz)
     #注入数据源的类型   默认的为HikariDataSource
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -25,6 +25,13 @@ spring:
         deny:
         url-pattern: /druid/*
         enabled: true  #启用数据源监控
+      filter:
+        config:
+          enabled: true
+      # 配置 connection-properties，启用加密，配置公钥。
+      connect-properties: config.decrypt=true;config.decrypt.key=${public-key}
+#druid生成的公钥
+public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAJ/t7iOomebChGBNhQZVyvw/yhQfMQrzeOyD5z+mf/i+imN7PXoHJQ5470ZoiyTNazVDFwDi6flRUbSypDGnDMECAwEAAQ==
   #配置redis
   redis:
     port: 6390
@@ -87,3 +94,6 @@ minio:
   proxyEndpoint: 127.0.0.1:9000
   accessKey: admin
   secretKey: minio@lzy
+jasypt:
+  encryptor:
+    password: liuzhaoyuan

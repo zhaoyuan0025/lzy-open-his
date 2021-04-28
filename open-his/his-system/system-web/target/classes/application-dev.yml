@@ -8,8 +8,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/lzy-his?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
-    username: root
-    password: 123456
+    username: ENC(vZsl8gKuyFucS4eMJw+rDGA/k4TVUkQ84F4TdYKsWIbRiJhqxvgq7lW0Pi/y1mig)
+    password: ENC(lFFAtOtPo7rfNAgQikYXdvdRwKkbsbvcCDsZLmquZQ6Xo0eFHnIqf3i5mRyjvKRz)
     #注入数据源的类型   默认的为HikariDataSource
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -28,8 +28,8 @@ spring:
   #配置redis
   redis:
     port: 6390
-    host:
-    password:
+    host: 47.93.125.194
+    password: ENC(lFFAtOtPo7rfNAgQikYXdvdRwKkbsbvcCDsZLmquZQ6Xo0eFHnIqf3i5mRyjvKRz)
   mvc:
     date-format: yyyy-MM-dd HH:mm:ss
   jackson:
@@ -64,9 +64,9 @@ fdfs:
     width: 100
     height: 100
   tracker-list:          # tracker服务配置地址列表
-    -
+    - 47.93.125.194:22122
 upload:
-  base-url:
+  base-url: 47.93.125.194:8888
   allow-types:
     - image/jpeg
     - image/png
@@ -76,14 +76,17 @@ dubbo:
   application:
     name: his-system-web-service
   registry:
-    address:
+    address: zookeeper://47.93.125.194:2181
   consumer:
     check: false
   config-center:
     timeout: 15
 #文件服务器
 minio:
-  apiEndpoint:
-#  proxyEndpoint: http://47.93.125.194:9000
-  accessKey:
-  secretKey:
+  apiEndpoint: http://47.93.125.194:9000
+  #  proxyEndpoint: http://47.93.125.194:9000
+  accessKey: ENC(pjE0U3cHUCIzHmWUs0KzhTHvVLKTMh3t7gG4b+Z6mEyJTT39oOXk++RspdvqJM/A)
+  secretKey: ENC/SDDYhOq5AZJV3izK/3fnXErw1iidEzcImIQqn/QoiMmv6Y4LPTFOR3Ws+ZTvQ66)
+jasypt:
+  encryptor:
+    password: liuzhaoyuan
