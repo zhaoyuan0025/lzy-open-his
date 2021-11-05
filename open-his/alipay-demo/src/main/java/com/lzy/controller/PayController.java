@@ -34,7 +34,7 @@ public class PayController {
     @PostMapping("/callBack/{orderId}")
     public void callBack(@PathVariable String orderId, HttpServletRequest request){
         Map<String, String> parameterMap = this.getParameterMap(request);
-        System.out.println("回调的参数："+parameterMap);
+        System.out.println("回调的参数========："+parameterMap);
         String trade_status = parameterMap.get("trade_status");
         if ("TRADE_SUCCESS".equals(trade_status)) {
             try {
@@ -87,6 +87,23 @@ public class PayController {
 
 
 
+    /**
+     * 密码验证
+     *  @param pwd
+     *  @return
+     */
+    public static void checkPwd(String pwd) {
+        String regExp = "^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9])(.{8,16})$";
+        if(!pwd.matches(regExp)) {
+            System.out.println("密码中必须包含字母(不区分大小写)、数字、特称字符，至少8个字符，最多16个字符");
+        }else {
+            System.out.println("密码校验过关！！！！");
 
+        }
+    }
+
+    public static void main(String[] args) {
+        checkPwd("Liu13755464546?");
+    }
 
 }

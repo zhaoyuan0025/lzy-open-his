@@ -1,13 +1,13 @@
 #开发环境
 #端口
 server:
-  port: 1001
+  port: 8081
 #spring的配置
 spring:
   #数据源的配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/lzy-his?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/lzy-his?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: ENC(vZsl8gKuyFucS4eMJw+rDGA/k4TVUkQ84F4TdYKsWIbRiJhqxvgq7lW0Pi/y1mig)
     password: ENC(lFFAtOtPo7rfNAgQikYXdvdRwKkbsbvcCDsZLmquZQ6Xo0eFHnIqf3i5mRyjvKRz)
     #注入数据源的类型   默认的为HikariDataSource

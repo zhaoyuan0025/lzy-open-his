@@ -1,10 +1,13 @@
 package com.lzy;
 
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
+import org.springframework.context.annotation.Bean;
 
 /**
  * @program: open-his
@@ -30,4 +33,15 @@ public class SystemApplication {
         +"======================================================================="+"\n"
         );
     }
+
+    /**
+     * 处理long类型精度丢失的问题
+     * @return
+     */
+    @Bean("jackson2ObjectMapperBuilderCustomizer")
+    public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer(){
+        return jacksonObjectMapperBuilder -> jacksonObjectMapperBuilder.serializerByType(Long.class, ToStringSerializer.instance)
+                .serializerByType(Long.TYPE,ToStringSerializer.instance);
+    }
+
 }

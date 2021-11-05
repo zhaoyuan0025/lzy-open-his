@@ -56,7 +56,7 @@
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <!--mybatisplus的包-->
+            <!--mybatis-plus的包-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>

@@ -1,5 +1,6 @@
 package com.lzy.controller.order;
 
+import com.lzy.utils.IdWorker;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,5 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order")
 public class OrderChargeController {
 
+    public static void main(String[] args) {
+        IdWorker idWorker = new IdWorker();
+        for (int i=0;i<5;i++){
+            String id = idWorker.nextId()+"";
+            System.out.println("id ======== " + id);
+
+        }
+    }
 
 }
