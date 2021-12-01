@@ -25,7 +25,7 @@ public interface RedisService {
     /**
      * 获取属性
      */
-    Object get(String key);
+    <T> T get(String key);
 
     /**
      * 删除属性

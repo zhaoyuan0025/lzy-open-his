@@ -130,4 +130,5 @@ public interface Constants {
     String LOGIN_TYPE_SYSTEM = "0" ;
     String LOGIN_TYPE_PATIENT = "1" ;
 
+    public static final String CODE_KEY = "code_";
 }

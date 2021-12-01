@@ -3,13 +3,15 @@ package com.lzy.controller.system;
 import cn.hutool.core.date.DateUtil;
 import com.lzy.aspectj.annotation.Log;
 import com.lzy.aspectj.enums.BussinessType;
+import com.lzy.common.minio.util.VerifyUtil;
+import com.lzy.common.redis.service.RedisService;
 import com.lzy.config.shiro.ActiverUser;
 import com.lzy.constants.Constants;
 import com.lzy.constants.HttpStatus;
 import com.lzy.domain.LoginInfo;
 import com.lzy.domain.Menu;
-import com.lzy.dto.LoginBodyDto;
 import com.lzy.domain.SimpleUser;
+import com.lzy.dto.LoginBodyDto;
 import com.lzy.service.LoginInfoService;
 import com.lzy.service.MenuService;
 import com.lzy.utils.AddressUtils;
@@ -18,7 +20,7 @@ import com.lzy.utils.ShiroSecurityUtils;
 import com.lzy.vo.AjaxResult;
 import com.lzy.vo.MenuTreeVo;
 import eu.bitwalker.useragentutils.UserAgent;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -27,7 +29,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +48,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/login")
-@Log4j
+@Slf4j
 public class LoginController {
 
     @Autowired
@@ -48,6 +56,9 @@ public class LoginController {
 
     @Autowired
     private LoginInfoService loginInfoService;
+
+    @Autowired
+    private RedisService redisService;
 
     /**
      * 登录
@@ -57,8 +68,17 @@ public class LoginController {
      */
     @PostMapping("/doLogin")
     public AjaxResult login(@RequestBody @Validated LoginBodyDto loginBodyDto, HttpServletRequest request){
+        //校验验证码 先比对验证码 不正确是出响应的thi上 yonghu
+//        String catchCode = redisService.get(loginBodyDto.getUuid() + Constants.CODE_KEY);
+//        if (StringUtils.isEmpty(catchCode)){
+//            throw new MedicalException("验证码已经过期！");
+//        }
+//        if (ObjectUtil.isEmpty(loginBodyDto.getCode()) && !loginBodyDto.getCode().equals(catchCode)){
+//            throw new MedicalException("验证码不正确!!!");
+//        }
         //默认是登录成功
         AjaxResult ajaxResult = AjaxResult.success();
+
         //得到用户名和密码
         String username = loginBodyDto.getUsername();
         String password = loginBodyDto.getPassword();
@@ -84,7 +104,7 @@ public class LoginController {
 
         } catch (AuthenticationException e) {
             //登录失败
-            log.error("用户名或者密码不正确");
+            System.out.println("用户名或者密码不正确");
             ajaxResult = AjaxResult.error(HttpStatus.ERROR,"用户名或者密码不正确");
             e.printStackTrace();
         }
@@ -175,4 +195,66 @@ public class LoginController {
         }
         return AjaxResult.success("菜单查询成功",menuTreeVos);
     }
+
+
+    /**
+     * 生成验证码的接口
+     *
+     * @param response Response对象
+     * @param request  Request对象
+     * @throws Exception
+     */
+    @PostMapping("/getCode")
+    public void getCode(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        // 获取到session
+        HttpSession session = request.getSession();
+        // 取到sessionid
+        String id = session.getId();
+
+        System.out.println("所生成的sessionID为:>>>>>>>>>>>>>>>>>" + id);
+        // 利用图片工具生成图片
+        // 返回的数组第一个参数是生成的验证码，第二个参数是生成的图片
+        Object[] objs = VerifyUtil.newBuilder()
+                //设置图片的宽度
+                .setWidth(120)
+                //设置图片的高度
+                .setHeight(35)
+                //设置字符的个数
+                .setSize(6)
+                //设置干扰线的条数
+                .setLines(10)
+                //设置字体的大小
+                .setFontSize(30)
+                //设置是否需要倾斜
+                .setTilt(true)
+                //设置验证码的背景颜色
+                .setBackgroundColor(Color.LIGHT_GRAY)
+                //构建VerifyUtil项目
+                .build()
+                //生成图片
+                .createImage();
+        // 将验证码存入Session
+        session.setAttribute("SESSION_VERIFY_CODE_" + id, objs[0]);
+        // 打印验证码
+        System.out.println(objs[0]);
+
+        // 设置redis值的序列化方式
+//        redisTemplate.setValueSerializer(new StringRedisSerializer());
+        // 在redis中保存一个验证码最多尝试次数
+        // 这里采用的是先预设一个上限次数，再以reidis decrement(递减)的方式来进行验证
+        // 这样有个缺点，就是用户只申请验证码，不验证就走了的话，这里就会白白占用5分钟的空间，造成浪费了
+        // 为了避免以上的缺点，也可以采用redis的increment（自增）方法，只有用户开始在做验证的时候设置值，
+        //    超过多少次错误，就失效；避免空间浪费
+        redisService.set(("VERIFY_CODE_" + id), "3", 5 * 60);
+
+        //将验证码存入redis中
+        redisService.set("code_"+id,objs[0],5*60);
+
+        // 将图片输出给浏览器 以流的形式你返回给前端
+        BufferedImage image = (BufferedImage) objs[1];
+        response.setContentType("image/png");
+        OutputStream os = response.getOutputStream();
+        ImageIO.write(image, "png", os);
+    }
+
 }

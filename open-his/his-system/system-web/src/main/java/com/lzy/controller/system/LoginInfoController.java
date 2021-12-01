@@ -24,6 +24,8 @@ public class LoginInfoController {
 
     /**
      * 分页查询
+     * @param loginInfoDto
+     * @return list
      */
     @GetMapping("/listForPage")
     public AjaxResult listForPage(LoginInfoDTO loginInfoDto){

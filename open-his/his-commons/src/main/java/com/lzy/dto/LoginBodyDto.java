@@ -30,7 +30,13 @@ public class LoginBodyDto implements Serializable {
     @NotNull(message = "用户密码不能为空")
     private String password;
 
-    // 验证码
+    /**
+     * 验证码
+     */
     private String code;
 
+    /**
+     * 唯一标识
+     */
+    private String uuid;
 }

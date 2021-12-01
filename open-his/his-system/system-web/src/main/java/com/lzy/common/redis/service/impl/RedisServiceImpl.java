@@ -1,8 +1,11 @@
 package com.lzy.common.redis.service.impl;
 
 import com.lzy.common.redis.service.RedisService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -15,9 +18,11 @@ import java.util.concurrent.TimeUnit;
  * @author: lzy
  * @create: 2021-03-01 16:00
  **/
+@Service
+@Slf4j
 public class RedisServiceImpl implements RedisService {
     @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    private RedisTemplate redisTemplate;
 
     @Override
     public void set(String key, Object value, long time) {
@@ -30,8 +35,9 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public Object get(String key) {
-        return redisTemplate.opsForValue().get(key);
+    public <T> T get(String key) {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        return operation.get(key);
     }
 
     @Override
