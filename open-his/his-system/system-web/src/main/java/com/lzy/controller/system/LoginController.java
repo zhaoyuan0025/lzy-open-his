@@ -211,7 +211,7 @@ public class LoginController {
         // 取到sessionid
         String id = session.getId();
 
-        System.out.println("所生成的sessionID为:>>>>>>>>>>>>>>>>>" + id);
+        log.info("所生成的sessionID为:>>>>>>>>>>>>>>>>>:{}" ,id);
         // 利用图片工具生成图片
         // 返回的数组第一个参数是生成的验证码，第二个参数是生成的图片
         Object[] objs = VerifyUtil.newBuilder()
@@ -236,7 +236,7 @@ public class LoginController {
         // 将验证码存入Session
         session.setAttribute("SESSION_VERIFY_CODE_" + id, objs[0]);
         // 打印验证码
-        System.out.println(objs[0]);
+        log.info("该验证码为>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>:{}",objs[0]);
 
         // 设置redis值的序列化方式
 //        redisTemplate.setValueSerializer(new StringRedisSerializer());
