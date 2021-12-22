@@ -97,3 +97,10 @@ minio:
 jasypt:
   encryptor:
     password: liuzhaoyuan
+#阿里OSS的配置信息
+aliyun:
+  oss:
+    endpoint:
+    keyId:
+    keySecret:
+    bucketName:
